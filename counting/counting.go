@@ -28,5 +28,16 @@ func Multiply1(r, n, a int) int {
 	if odd(n) {
 		return Multiply1(r + a, half(n), a + a)
 	} 
-		return Multiply1(r, half(n), a + a)
+	return Multiply1(r, half(n), a + a)
+}
+
+// Multiply2, tail-recursive
+func Multiply2(r, n, a int) int {
+	if odd(n) {
+		r = r + a
+		if n == 1 {
+			return r
+		}
+	}
+	return Multiply2(r, half(n), a + a)
 }
