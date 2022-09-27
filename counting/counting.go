@@ -5,7 +5,7 @@ func Multiply(n, a int) int {
 	if n == 1 {
 		return a
 	}
-	result := Multiply(half(n), a + a)
+	result := Multiply(half(n), a+a)
 	if odd(n) {
 		result = result + a
 	}
@@ -13,7 +13,7 @@ func Multiply(n, a int) int {
 }
 
 func odd(n int) bool {
-	return n & 1 == 1
+	return n&1 == 1
 }
 
 func half(n int) int {
@@ -26,9 +26,9 @@ func Multiply1(r, n, a int) int {
 		return r + a
 	}
 	if odd(n) {
-		return Multiply1(r + a, half(n), a + a)
-	} 
-	return Multiply1(r, half(n), a + a)
+		return Multiply1(r+a, half(n), a+a)
+	}
+	return Multiply1(r, half(n), a+a)
 }
 
 // Multiply2, tail-recursive
@@ -39,5 +39,10 @@ func Multiply2(r, n, a int) int {
 			return r
 		}
 	}
-	return Multiply2(r, half(n), a + a)
+	return Multiply2(r, half(n), a+a)
+}
+
+// OblongNumber, n th oblong number
+func OblongNumber(n int) int {
+	return n * (n + 1)
 }
