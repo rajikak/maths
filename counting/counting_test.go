@@ -14,6 +14,15 @@ func TestSieve(t *testing.T) {
 	}
 }
 
+func BenchmarkSieve(b *testing.B) {
+
+	n := 1000
+	for i:= 0; i < b.N; i++ {
+		Sieve(n)
+	}
+}
+
+
 func TestMultiply(t *testing.T) {
 	type args struct {
 		n int
