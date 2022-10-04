@@ -46,3 +46,22 @@ func Multiply2(r, n, a int) int {
 func OblongNumber(n int) int {
 	return n * (n + 1)
 }
+
+// Sieve of Eratosthenes
+// https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html
+func Sieve(n int) []bool{
+	var primes = make([]bool, n)
+	
+	for i := 2; i < n; i++ {
+		primes[i] = true 
+	}
+
+	for i := 2; i < n; i++ {
+		if primes[i] && (i * i <= n) {
+			for j := i * i; j < n; j += i {
+				primes[j] = false
+			}
+		}
+	}
+	return primes
+}

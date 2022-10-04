@@ -2,6 +2,18 @@ package counting
 
 import "testing"
 
+
+// go test -test.v
+func TestSieve(t *testing.T) {
+
+	n := 50
+	p := Sieve(n)
+
+	for i, isPrime := range p {
+		t.Logf("%d , %v", i, isPrime)
+	}
+}
+
 func TestMultiply(t *testing.T) {
 	type args struct {
 		n int
@@ -67,3 +79,4 @@ func TestOblongNumber(t *testing.T) {
 
 	}
 }
+
