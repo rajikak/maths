@@ -1,5 +1,17 @@
 package counting
 
+// GreatestCommonMeasure https://en.wikipedia.org/wiki/Greatest_common_divisor
+func GreatestCommonMeasure(a, b int) int {
+
+	if a == b {
+		return a
+	} else if b < a {
+		return GreatestCommonMeasure(a - b, b)
+	} else {
+		return GreatestCommonMeasure(a, b - a)
+	}
+}
+
 // Multiply https://en.wikipedia.org/wiki/Ancient_Egyptian_multiplication
 func Multiply(n, a int) int {
 	if n == 1 {

@@ -3,14 +3,39 @@ package counting
 import "testing"
 
 
+func TestGreatestCommonMeasure(t *testing.T) {
+	
+	type args struct {
+		a int
+		b int 
+	}
+	tests := []struct {
+		args args
+		want int
+	} {
+		{args{196, 42}, 14},
+		{args{196, 200}, 4},
+		{args{25, 200}, 25},
+		{args{200, 1200}, 200},
+	}
+
+	for _, test := range tests {
+		if got := GreatestCommonMeasure(test.args.a, test.args.b); got != test.want {
+			t.Errorf("gcm(%v, %v) = %v, want = %v", test.args.a, test.args.b, got, test.want)
+		}
+	}
+}
+
 // go test -test.v
 func TestSieve(t *testing.T) {
 
-	n := 50
+	n := 1000
 	p := Sieve(n)
 
 	for i, isPrime := range p {
-		t.Logf("%d , %v", i, isPrime)
+		if isPrime {
+			t.Logf("%d", i)
+		}
 	}
 }
 
