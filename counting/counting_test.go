@@ -2,8 +2,22 @@ package counting
 
 import "testing"
 
+func BenchmarkGreatestCommonMeasure(b *testing.B) {
 
-func TestGreatestCommonMeasure(t *testing.T) {
+	n := 1000
+	for i := 0; i < n; i++ {
+		GreatestCommonMeasure(196, 42)
+	}
+}
+
+func BenchmarkEuclid(b *testing.B) {
+	n := 1000
+	for i := 0; i < n;i++ {
+		Euclid(196, 42)
+	}
+}
+
+func TestGCM(t *testing.T) {
 	
 	type args struct {
 		a int
@@ -21,7 +35,10 @@ func TestGreatestCommonMeasure(t *testing.T) {
 
 	for _, test := range tests {
 		if got := GreatestCommonMeasure(test.args.a, test.args.b); got != test.want {
-			t.Errorf("gcm(%v, %v) = %v, want = %v", test.args.a, test.args.b, got, test.want)
+			t.Errorf("gcd(%v, %v) = %v, want = %v", test.args.a, test.args.b, got, test.want)
+		}
+		if got := Euclid(test.args.a, test.args.b); got != test.want {
+			t.Errorf("Euclid's gcd(%v, %v) = %v, want = %v", test.args.a, test.args.b, got, test.want)
 		}
 	}
 }

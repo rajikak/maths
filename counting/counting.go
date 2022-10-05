@@ -1,5 +1,17 @@
 package counting
 
+// Euclid, gcd
+func Euclid(a, b int) int {
+	for a != b {
+		if b < a {
+			a = a - b
+		} else {
+			b = b - a
+		}
+	}
+	return a
+}  
+
 // GreatestCommonMeasure https://en.wikipedia.org/wiki/Greatest_common_divisor
 func GreatestCommonMeasure(a, b int) int {
 
