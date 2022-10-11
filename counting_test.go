@@ -2,6 +2,20 @@ package counting
 
 import "testing"
 
+func BenchmarkFastSegmentRemainder(b *testing.B) {
+	n := 1000
+	for i := 0; i < n; i++ {
+		FastSegmentRemainder(20, 190)
+	}
+}
+
+func BenchmarkFastSegmentRemainder2(b *testing.B) {
+	n := 1000
+	for i := 0; i < n;i++ {
+		FastSegmentRemainder2(20, 190)
+	}
+}
+
 func BenchmarkGreatestCommonMeasure(b *testing.B) {
 
 	n := 1000
@@ -12,21 +26,45 @@ func BenchmarkGreatestCommonMeasure(b *testing.B) {
 
 func BenchmarkEuclid(b *testing.B) {
 	n := 1000
-	for i := 0; i < n;i++ {
+	for i := 0; i < n; i++ {
 		Euclid(196, 42)
 	}
 }
 
-func TestGCM(t *testing.T) {
-	
+func TestFastSegmentRemainder(t *testing.T) {
 	type args struct {
 		a int
-		b int 
+		b int
 	}
 	tests := []struct {
 		args args
 		want int
-	} {
+	}{
+		{args{196, 42}, 28},
+		{args{196, 200}, 196},
+	}
+
+	for _, test := range tests {
+		if got := FastSegmentRemainder(test.args.a, test.args.b); got != test.want {
+			t.Errorf("FastSegmentRemainder gcd(%v, %v) = %v, want = %v", test.args.a, test.args.b, got, test.want)
+		}
+
+		if got := FastSegmentRemainder2(test.args.a, test.args.b); got != test.want {
+			t.Errorf("FastSegmentRemainder2 gcd(%d, %d) = %d, want = %d", test.args.a, test.args.b, got, test.want)
+		}
+	}
+}
+
+func TestGCM(t *testing.T) {
+
+	type args struct {
+		a int
+		b int
+	}
+	tests := []struct {
+		args args
+		want int
+	}{
 		{args{196, 42}, 14},
 		{args{196, 200}, 4},
 		{args{25, 200}, 25},
@@ -59,11 +97,10 @@ func TestSieve(t *testing.T) {
 func BenchmarkSieve(b *testing.B) {
 
 	n := 1000
-	for i:= 0; i < b.N; i++ {
+	for i := 0; i < b.N; i++ {
 		Sieve(n)
 	}
 }
-
 
 func TestMultiply(t *testing.T) {
 	type args struct {
@@ -130,4 +167,3 @@ func TestOblongNumber(t *testing.T) {
 
 	}
 }
-

@@ -1,5 +1,58 @@
 package counting
 
+// non-recursive version - see the benchmark tests how this out perform
+// the recursive version.
+func FastSegmentRemainder2(a, b int) int {
+	if b == 0 {
+		return -1
+	}
+
+	if a < b {
+		return a
+	}
+	c := largetDoubling(a, b)
+	a = a - c
+	for c != b {
+		c = half(c)
+		if c <= a {
+			a = a - c
+		}
+	}
+	return a
+}
+
+func largetDoubling(a, b int) int{
+	if b == 0 {
+		return -1
+	}
+	for (a - b >= b) {
+		b = b + b
+	}
+	return b
+}
+
+func FastSegmentRemainder(a, b int) int {
+
+	if b == 0 {
+		return -1
+	}
+
+	if a < b {
+		return a
+	}
+
+	if (a - b) < b {
+		return a - b
+	}
+	a = FastSegmentRemainder(a, b+b)
+
+	if a < b {
+		return a
+	}
+	return a - b
+
+}
+
 // Euclid, gcd
 func Euclid(a, b int) int {
 	for a != b {
@@ -10,7 +63,7 @@ func Euclid(a, b int) int {
 		}
 	}
 	return a
-}  
+}
 
 // GreatestCommonMeasure https://en.wikipedia.org/wiki/Greatest_common_divisor
 func GreatestCommonMeasure(a, b int) int {
@@ -18,9 +71,9 @@ func GreatestCommonMeasure(a, b int) int {
 	if a == b {
 		return a
 	} else if b < a {
-		return GreatestCommonMeasure(a - b, b)
+		return GreatestCommonMeasure(a-b, b)
 	} else {
-		return GreatestCommonMeasure(a, b - a)
+		return GreatestCommonMeasure(a, b-a)
 	}
 }
 
@@ -73,15 +126,15 @@ func OblongNumber(n int) int {
 
 // Sieve of Eratosthenes
 // https://cp-algorithms.com/algebra/sieve-of-eratosthenes.html
-func Sieve(n int) []bool{
+func Sieve(n int) []bool {
 	var primes = make([]bool, n)
-	
+
 	for i := 2; i < n; i++ {
-		primes[i] = true 
+		primes[i] = true
 	}
 
 	for i := 2; i < n; i++ {
-		if primes[i] && (i * i <= n) {
+		if primes[i] && (i*i <= n) {
 			for j := i * i; j < n; j += i {
 				primes[j] = false
 			}
