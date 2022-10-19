@@ -1,4 +1,4 @@
-package counting
+package math
 
 // non-recursive version - see the benchmark tests how this out perform
 // the recursive version.
@@ -21,11 +21,11 @@ func FastSegmentRemainder2(a, b int) int {
 	return a
 }
 
-func largetDoubling(a, b int) int{
+func largetDoubling(a, b int) int {
 	if b == 0 {
 		return -1
 	}
-	for (a - b >= b) {
+	for a-b >= b {
 		b = b + b
 	}
 	return b

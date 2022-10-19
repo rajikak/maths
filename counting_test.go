@@ -1,4 +1,4 @@
-package counting
+package math
 
 import "testing"
 
@@ -11,7 +11,7 @@ func BenchmarkFastSegmentRemainder(b *testing.B) {
 
 func BenchmarkFastSegmentRemainder2(b *testing.B) {
 	n := 1000
-	for i := 0; i < n;i++ {
+	for i := 0; i < n; i++ {
 		FastSegmentRemainder2(20, 190)
 	}
 }
